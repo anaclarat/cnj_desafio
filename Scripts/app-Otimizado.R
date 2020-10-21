@@ -350,7 +350,7 @@ ui <- fluidPage(
                            br(),h4(strong('PRIMEIRA CONSULTA')),
                            br(),h4('Selecione no menu lateral os filtros desejados e em seguida selecione o modelo que deseja visualizar no menu superior. Obs: nenhum filtro deve ser alterado durante visualização.'),
                            br(),h4(strong('PRÓXIMA CONSULTA')),
-                           br(),h4('Clique em *Nova Pesquisa* para reiniciar as escolhas dos filtros no menu lateral e em seguida selecione o modelo que deseja visualizar no menu superior.'),
+                           br(),h4('Clique em *Limpar campos* para reiniciar as escolhas dos filtros no menu lateral e em seguida selecione o modelo que deseja visualizar no menu superior.'),
                            br(),h4(strong('Obs:')),
                            br(),h4('Certifique-se que todas as seleções do menu lateral encontram-se na opção *Todos* antes de reiniciar a seleção dos filtros.')),
                   
@@ -400,6 +400,12 @@ ui <- fluidPage(
                   
                   tabPanel(title = "Matriz de Dependências",
                            br(), grVizOutput("Dependency_Tot"))
+                  # ,
+                  # 
+                  # tabPanel(title = "Checagem de Regras",
+                  #          br(), tableOutput("check_rules1"))
+                  # 
+                  
                   
                   
       )
@@ -858,41 +864,28 @@ server <- function(input, output, session) {
   
   # Verificação de conformidade
   
-  output$check_rules1 <- renderTable({
-    ##filtros
-    filtroGrOrgaos <- as.character(formulaText0())
-    filtroAssuntos <- as.character(formulaText1())
-    filtroClasses <- as.character(formulaText2())
-    filtroGrau <- as.character(formulaText3())
-    filtroOrgao <- as.character(formulaText4())
-    
-    ##filtragem
-    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
-    
-    mc_log_resource %>%
-      check_rule(starts("Distribuição"), label = "Distribuição") %>%
-      check_rule(ends("Baixa Definitiva"), label = "Baixa_definitiva") %>%
-      group_by(Distribui??o, Baixa_definitiva) %>%
-      n_cases()
-  })
-  
-  output$check_rules2 <- renderTable({
-    ##filtros
-    filtroGrOrgaos <- as.character(formulaText0())
-    filtroAssuntos <- as.character(formulaText1())
-    filtroClasses <- as.character(formulaText2())
-    filtroGrau <- as.character(formulaText3())
-    filtroOrgao <- as.character(formulaText4())
-    
-    ##filtragem
-    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
-    
-    mc_log_resource %>%
-      check_rule(contains_exactly("Distribuição", n = 1), label = "Distribuição") %>%
-      check_rule(contains_exactly("Baixa Definitiva", n = 1), label = "Baixa_definitiva") %>%
-      group_by(Distribui??o, Baixa_definitiva) %>%
-      n_cases()
-  })  
+  # output$check_rules1 <- renderUI({
+  #   
+  #   # tagList(
+  #   #   p("Mapa de Checagem de Regras 1"),
+  #     renderTable({
+  #       ##filtros
+  #       filtroGrOrgaos <- as.character(formulaText0())
+  #       filtroAssuntos <- as.character(formulaText1())
+  #       filtroClasses <- as.character(formulaText2())
+  #       filtroGrau <- as.character(formulaText3())
+  #       filtroOrgao <- as.character(formulaText4())
+  #       ##filtragem
+  #       mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
+  #       
+  #       mc_log_resource %>%
+  #         check_rule(starts("Distribuição"), label = "Distribuição") %>%
+  #         check_rule(ends("Baixa Definitiva"), label = "Baixa_definitiva") %>%
+  #         group_by(Distribui??o, Baixa_definitiva) %>%
+  #         n_cases()
+  #       })
+  #   })
+  # 
   
 } # end of server
 
