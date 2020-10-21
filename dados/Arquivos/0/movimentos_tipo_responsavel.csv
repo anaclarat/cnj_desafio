@@ -1,0 +1,694 @@
+codigo;tipo_responsavel_movimento
+1;Magistrado
+3;Magistrado
+7;Magistrado
+11;Magistrado
+14;Serventuário
+15;Serventuário - Contador
+16;Serventuário - Contador
+18;Serventuário - Distribuidor
+22;Serventuário - Distribuidor
+25;Magistrado
+26;Serventuário - Distribuidor
+36;Serventuário - Distribuidor
+48;Serventuário - Escrivão
+51;Serventuário - Escrivão
+56;Magistrado
+60;Serventuário - Escrivão
+63;Magistrado
+67;Serventuário - Escrivão
+83;Magistrado
+85;Serventuário - Escrivão
+92;Serventuário - Escrivão
+104;Serventuário - Oficial de Justiça
+105;Serventuário - Oficial de Justiça
+106;Serventuário - Oficial de Justiça
+108;Magistrado
+112;Serventuário - Oficial de Justiça
+113;Magistrado
+115;Serventuário - Oficial de Justiça
+117;Magistrado
+118;Serventuário - Escrivão
+122;Magistrado
+123;Serventuário - Escrivão
+128;Magistrado
+132;Serventuário - Escrivão
+133;Magistrado
+135;Serventuário - Escrivão
+137;Serventuário - Escrivão
+138;Magistrado
+146;Magistrado
+151;Magistrado
+157;Magistrado
+160;Magistrado
+163;Magistrado
+172;Magistrado
+175;Magistrado
+190;Magistrado
+193;Magistrado
+196;Magistrado
+198;Magistrado
+200;Magistrado
+202;Magistrado
+206;Magistrado
+207;Magistrado
+208;Magistrado
+210;Magistrado
+212;Magistrado
+214;Magistrado
+218;Magistrado
+219;Magistrado
+220;Magistrado
+221;Magistrado
+228;Magistrado
+230;Magistrado
+235;Magistrado
+236;Magistrado
+237;Magistrado
+238;Magistrado
+239;Magistrado
+240;Magistrado
+241;Magistrado
+242;Magistrado
+244;Magistrado
+245;Serventuário - Escrivão
+246;Serventuário - Escrivão
+263;Magistrado
+264;Magistrado
+265;Magistrado
+266;Magistrado
+268;Magistrado
+269;Magistrado
+270;Magistrado
+271;Magistrado
+272;Magistrado
+275;Magistrado
+276;Magistrado
+277;Magistrado
+278;Magistrado
+279;Magistrado
+311;Serventuário - Escrivão
+313;Serventuário - Escrivão
+332;Magistrado
+334;Magistrado
+335;Magistrado
+339;Magistrado
+347;Magistrado
+348;Magistrado
+349;Magistrado
+352;Magistrado
+353;Magistrado
+354;Magistrado
+355;Magistrado
+357;Magistrado
+358;Magistrado
+371;Magistrado
+373;Magistrado
+374;Magistrado
+377;Magistrado
+378;Magistrado
+381;Magistrado
+383;Magistrado
+385;Magistrado
+388;Magistrado
+389;Magistrado
+390;Magistrado
+391;Magistrado
+392;Magistrado
+393;Magistrado
+394;Magistrado
+399;Magistrado
+400;Magistrado
+402;Magistrado
+404;Magistrado
+417;Serventuário - Escrivão
+429;Magistrado
+430;Magistrado
+431;Magistrado
+432;Magistrado
+433;Magistrado
+434;Magistrado
+442;Magistrado
+443;Magistrado
+444;Magistrado
+445;Magistrado
+446;Magistrado
+447;Magistrado
+448;Magistrado
+449;Magistrado
+450;Magistrado
+451;Magistrado
+452;Magistrado
+453;Magistrado
+454;Magistrado
+455;Magistrado
+456;Magistrado
+457;Magistrado
+458;Magistrado
+459;Magistrado
+460;Magistrado
+461;Magistrado
+462;Magistrado
+463;Magistrado
+464;Magistrado
+465;Magistrado
+466;Magistrado
+471;Magistrado
+472;Magistrado
+473;Magistrado
+478;Serventuário - Contador
+479;Serventuário - Contador
+480;Serventuário - Contador
+481;Serventuário - Contador
+488;Serventuário - Distribuidor
+493;Serventuário - Escrivão
+581;Serventuário - Escrivão
+785;Magistrado
+787;Magistrado
+788;Magistrado
+792;Magistrado
+799;Magistrado
+803;Magistrado
+804;Magistrado
+817;Magistrado
+818;Magistrado
+819;Magistrado
+821;Magistrado
+823;Magistrado
+824;Magistrado
+848;Serventuário - Escrivão
+849;Serventuário - Escrivão
+853;Magistrado
+861;Serventuário - Escrivão
+865;Serventuário - Arquivista
+866;Serventuário - Arquivista
+867;Serventuário - Arquivista
+869;Serventuário - Arquivista
+870;Serventuário - Arquivista
+871;Magistrado
+873;Serventuário - Escrivão
+884;Magistrado
+888;Magistrado
+889;Magistrado
+892;Magistrado
+893;Serventuário - Escrivão
+897;Serventuário - Escrivão
+898;Magistrado
+900;Magistrado
+901;Magistrado
+905;Magistrado
+928;Serventuário - Escrivão
+940;Magistrado
+941;Magistrado
+944;Magistrado
+945;Magistrado
+947;Magistrado
+960;Magistrado
+961;Magistrado
+968;Magistrado
+970;Serventuário - Escrivão
+971;Magistrado
+972;Magistrado
+973;Magistrado
+977;Serventuário - Arquivista
+978;Serventuário - Arquivista
+979;Serventuário - Contador
+980;Serventuário - Contador
+981;Serventuário - Distribuidor
+982;Serventuário - Distribuidor
+985;Magistrado
+987;Magistrado
+988;Magistrado
+990;Magistrado
+1002;Magistrado
+1003;Magistrado
+1004;Magistrado
+1008;Magistrado
+1009;Magistrado
+1010;Magistrado
+1011;Magistrado
+1013;Magistrado
+1014;Magistrado
+1015;Magistrado
+1016;Magistrado
+1017;Magistrado
+1018;Magistrado
+1019;Magistrado
+1042;Magistrado
+1043;Magistrado
+1044;Magistrado
+1045;Magistrado
+1046;Magistrado
+1047;Magistrado
+1048;Magistrado
+1049;Magistrado
+1050;Magistrado
+1051;Serventuário - Escrivão
+1052;Serventuário - Escrivão
+1053;Magistrado
+1054;Magistrado
+1055;Magistrado
+1059;Magistrado
+1060;Magistrado
+1061;Serventuário - Escrivão
+1062;Serventuário - Escrivão
+1063;Magistrado
+10953;Magistrado
+10961;Magistrado
+10962;Magistrado
+10963;Magistrado
+10964;Magistrado
+10965;Magistrado
+10966;Serventuário - Escrivão
+11002;Magistrado
+11003;Serventuário - Escrivão
+11008;Serventuário - Escrivão
+11009;Magistrado
+11010;Magistrado
+11011;Magistrado
+11012;Magistrado
+11013;Magistrado
+11014;Magistrado
+11015;Magistrado
+11016;Magistrado
+11017;Magistrado
+11018;Magistrado
+11019;Magistrado
+11020;Magistrado
+11021;Magistrado
+11022;Magistrado
+11023;Magistrado
+11024;Magistrado
+11025;Magistrado
+11373;Magistrado
+11374;Magistrado
+11375;Magistrado
+11376;Magistrado
+11377;Magistrado
+11378;Magistrado
+11379;Magistrado
+11380;Magistrado
+11381;Magistrado
+11382;Magistrado
+11383;Serventuário - Escrivão
+11384;Serventuário - Escrivão
+11385;Serventuário - Escrivão
+11393;Magistrado
+11394;Magistrado
+11395;Magistrado
+11396;Magistrado
+11401;Magistrado
+11402;Magistrado
+11403;Magistrado
+11404;Magistrado
+11405;Magistrado
+11406;Magistrado
+11407;Magistrado
+11408;Magistrado
+11409;Magistrado
+11411;Magistrado
+11415;Magistrado
+11423;Magistrado
+11424;Magistrado
+11425;Magistrado
+11426;Magistrado
+11554;Magistrado
+11792;Magistrado
+11795;Magistrado
+11796;Magistrado
+11801;Magistrado
+11876;Magistrado
+11877;Magistrado
+11878;Magistrado
+11879;Magistrado
+11975;Magistrado
+11983;Serventuário - Escrivão
+12028;Magistrado
+12029;Serventuário - Arquivista
+12032;Magistrado
+12033;Magistrado
+12034;Magistrado
+12035;Magistrado
+12036;Magistrado
+12037;Magistrado
+12038;Magistrado
+12039;Magistrado
+12040;Magistrado
+12041;Magistrado
+12065;Serventuário - Escrivão
+12066;Serventuário - Escrivão
+12067;Magistrado
+12068;Magistrado
+12092;Magistrado
+12093;Magistrado
+12094;Magistrado
+12095;Magistrado
+12096;Magistrado
+12097;Magistrado
+12098;Magistrado
+12099;Magistrado
+12100;Magistrado
+12101;Serventuário - Escrivão
+12102;Serventuário - Escrivão
+12103;Serventuário - Escrivão
+12104;Serventuário - Escrivão
+12105;Serventuário - Escrivão
+12106;Serventuário - Escrivão
+12107;Serventuário - Escrivão
+12108;Serventuário - Escrivão
+12109;Serventuário - Escrivão
+12110;Serventuário - Escrivão
+12111;Serventuário - Escrivão
+12112;Serventuário - Escrivão
+12113;Serventuário - Escrivão
+12114;Serventuário - Escrivão
+12115;Serventuário - Escrivão
+12116;Serventuário - Escrivão
+12140;Magistrado
+12141;Magistrado
+12142;Serventuário - Escrivão
+12143;Serventuário - Escrivão
+12144;Magistrado
+12145;Magistrado
+12146;Magistrado
+12147;Magistrado
+12148;Magistrado
+12149;Magistrado
+12150;Magistrado
+12151;Magistrado
+12163;Magistrado
+12164;Magistrado
+12165;Serventuário - Escrivão
+12166;Serventuário - Escrivão
+12167;Serventuário - Escrivão
+12168;Serventuário - Escrivão
+12169;Serventuário - Escrivão
+12170;Serventuário - Escrivão
+12171;Serventuário - Escrivão
+12172;Serventuário - Escrivão
+12173;Serventuário - Escrivão
+12174;Serventuário - Escrivão
+12175;Serventuário - Escrivão
+12176;Serventuário - Escrivão
+12177;Serventuário - Escrivão
+12178;Serventuário - Escrivão
+12179;Serventuário - Escrivão
+12180;Magistrado
+12181;Magistrado
+12182;Magistrado
+12183;Magistrado
+12184;Magistrado
+12185;Magistrado
+12186;Serventuário - Escrivão
+12187;Magistrado
+12188;Magistrado
+12189;Serventuário - Escrivão
+12198;Serventuário - Escrivão
+12199;Serventuário - Escrivão
+12200;Serventuário - Escrivão
+12201;Serventuário - Escrivão
+12202;Serventuário - Escrivão
+12203;Serventuário - Escrivão
+12204;Serventuário - Escrivão
+12205;Serventuário - Escrivão
+12206;Magistrado
+12207;Magistrado
+12208;Magistrado
+12209;Magistrado
+12210;Magistrado
+12211;Magistrado
+12212;Serventuário - Escrivão
+12213;Magistrado
+12214;Serventuário - Escrivão
+12215;Serventuário - Escrivão
+12252;Magistrado
+12253;Magistrado
+12254;Magistrado
+12255;Magistrado
+12256;Magistrado
+12257;Magistrado
+12258;Magistrado
+12259;Magistrado
+12260;Serventuário - Escrivão
+12261;Magistrado
+12262;Magistrado
+12263;Serventuário - Escrivão
+12264;Serventuário - Escrivão
+12265;Serventuário - Escrivão
+12266;Serventuário - Escrivão
+12267;Serventuário - Escrivão
+12268;Serventuário - Escrivão
+12269;Serventuário - Escrivão
+12270;Serventuário - Escrivão
+12271;Serventuário - Escrivão
+12272;Serventuário - Escrivão
+12273;Serventuário - Escrivão
+12274;Serventuário - Escrivão
+12275;Serventuário - Escrivão
+12276;Serventuário - Escrivão
+12277;Serventuário - Escrivão
+12278;Serventuário - Escrivão
+12279;Serventuário - Escrivão
+12280;Serventuário - Escrivão
+12281;Serventuário - Escrivão
+12282;Serventuário - Escrivão
+12283;Serventuário - Escrivão
+12284;Serventuário - Escrivão
+12285;Serventuário - Escrivão
+12286;Serventuário - Escrivão
+12287;Serventuário - Escrivão
+12288;Serventuário - Escrivão
+12289;Serventuário - Escrivão
+12290;Serventuário - Escrivão
+12291;Serventuário - Escrivão
+12292;Serventuário - Escrivão
+12293;Serventuário - Escrivão
+12294;Serventuário - Escrivão
+12295;Serventuário - Escrivão
+12296;Serventuário - Distribuidor
+12297;Serventuário - Distribuidor
+12298;Magistrado
+12299;Magistrado
+12300;Magistrado
+12301;Magistrado
+12302;Magistrado
+12303;Magistrado
+12304;Magistrado
+12305;Magistrado
+12306;Magistrado
+12307;Magistrado
+12308;Magistrado
+12309;Serventuário - Escrivão
+12310;Magistrado
+12311;Magistrado
+12312;Magistrado
+12313;Magistrado
+12314;Magistrado
+12315;Serventuário - Escrivão
+12316;Serventuário - Escrivão
+12317;Serventuário - Escrivão
+12318;Magistrado
+12319;Magistrado
+12320;Magistrado
+12321;Magistrado
+12322;Magistrado
+12323;Magistrado
+12324;Magistrado
+12325;Magistrado
+12326;Magistrado
+12327;Magistrado
+12328;Magistrado
+12329;Magistrado
+12330;Magistrado
+12331;Magistrado
+12332;Magistrado
+12359;Magistrado
+12387;Magistrado
+12421;Magistrado
+12422;Magistrado
+12425;Magistrado
+12427;Magistrado
+12428;Magistrado
+12429;Magistrado
+12430;Magistrado
+12431;Magistrado
+12432;Magistrado
+12433;Magistrado
+12434;Magistrado
+12435;Magistrado
+12436;Magistrado
+12437;Magistrado
+12438;Magistrado
+12439;Magistrado
+12440;Magistrado
+12441;Magistrado
+12442;Magistrado
+12443;Magistrado
+12444;Magistrado
+12445;Magistrado
+12446;Magistrado
+12447;Magistrado
+12448;Magistrado
+12449;Magistrado
+12450;Magistrado
+12451;Magistrado
+12452;Magistrado
+12453;Magistrado
+12454;Magistrado
+12455;Magistrado
+12456;Magistrado
+12457;Magistrado
+12458;Magistrado
+12459;Magistrado
+12467;Magistrado
+12472;Magistrado
+12473;Magistrado
+12474;Magistrado
+12475;Magistrado
+12476;Magistrado
+12477;Magistrado
+12478;Magistrado
+12479;Magistrado
+12522;Serventuário - Auxiliar da Justiça
+12523;Serventuário - Auxiliar da Justiça
+12524;Serventuário - Auxiliar da Justiça
+12525;Serventuário - Auxiliar da Justiça
+12526;Serventuário - Auxiliar da Justiça
+12527;Serventuário - Auxiliar da Justiça
+12528;Magistrado
+12529;Serventuário - Auxiliar da Justiça
+12530;Serventuário - Auxiliar da Justiça
+12531;Serventuário - Auxiliar da Justiça
+12532;Serventuário - Auxiliar da Justiça
+12533;Serventuário - Auxiliar da Justiça
+12534;Serventuário - Auxiliar da Justiça
+12535;Serventuário - Auxiliar da Justiça
+12536;Serventuário - Auxiliar da Justiça
+12537;Serventuário - Auxiliar da Justiça
+12538;Serventuário - Auxiliar da Justiça
+12539;Serventuário - Auxiliar da Justiça
+12540;Serventuário - Auxiliar da Justiça
+12548;Magistrado
+12606;Serventuário - Escrivão
+12607;Serventuário - Escrivão
+12608;Serventuário - Auxiliar da Justiça
+12609;Serventuário - Auxiliar da Justiça
+12610;Serventuário - Auxiliar da Justiça
+12611;Serventuário - Auxiliar da Justiça
+12614;Serventuário - Escrivão
+12615;Magistrado
+12616;Magistrado
+12617;Magistrado
+12618;Serventuário - Escrivão
+12619;Serventuário - Escrivão
+12621;Serventuário - Escrivão
+12622;Serventuário - Escrivão
+12623;Serventuário - Escrivão
+12624;Serventuário - Escrivão
+12646;Magistrado
+12647;Magistrado
+12648;Magistrado
+12649;Magistrado
+12650;Magistrado
+12651;Magistrado
+12652;Magistrado
+12653;Magistrado
+12654;Magistrado
+12655;Serventuário - Escrivão
+12656;Serventuário - Escrivão
+12657;Serventuário - Escrivão
+12658;Serventuário - Escrivão
+12659;Serventuário - Escrivão
+12660;Magistrado
+12661;Magistrado
+12662;Magistrado
+12663;Magistrado
+12664;Magistrado
+12665;Magistrado
+12666;Magistrado
+12667;Magistrado
+12668;Magistrado
+12669;Magistrado
+12670;Magistrado
+12671;Magistrado
+12672;Magistrado
+12673;Magistrado
+12674;Magistrado
+12675;Magistrado
+12676;Magistrado
+12677;Magistrado
+12678;Magistrado
+12679;Magistrado
+12680;Magistrado
+12681;Magistrado
+12682;Magistrado
+12683;Magistrado
+12684;Magistrado
+12685;Magistrado
+12686;Magistrado
+12687;Magistrado
+12688;Magistrado
+12689;Magistrado
+12690;Magistrado
+12691;Magistrado
+12692;Magistrado
+12693;Magistrado
+12694;Magistrado
+12695;Magistrado
+12696;Magistrado
+12697;Magistrado
+12698;Magistrado
+12699;Magistrado
+12700;Magistrado
+12701;Magistrado
+12702;Magistrado
+12703;Magistrado
+12704;Magistrado
+12705;Magistrado
+12706;Magistrado
+12707;Magistrado
+12708;Magistrado
+12709;Magistrado
+12710;Magistrado
+12711;Magistrado
+12712;Magistrado
+12713;Magistrado
+12714;Magistrado
+12715;Magistrado
+12716;Magistrado
+12717;Magistrado
+12718;Magistrado
+12719;Magistrado
+12720;Magistrado
+12721;Magistrado
+12722;Magistrado
+12723;Magistrado
+12724;Magistrado
+12733;Magistrado
+12734;Magistrado
+12735;Magistrado
+12736;Magistrado
+12737;Magistrado
+12738;Magistrado
+12739;Serventuário - Escrivão
+12740;Serventuário - Escrivão
+12741;Serventuário - Escrivão
+12742;Serventuário - Escrivão
+12743;Serventuário - Escrivão
+12744;Serventuário - Escrivão
+12745;Serventuário - Escrivão
+12746;Serventuário - Escrivão
+12747;Serventuário - Escrivão
+12748;Serventuário - Escrivão
+12749;Serventuário - Escrivão
+12750;Serventuário - Escrivão
+12751;Serventuário - Escrivão
+12752;Serventuário - Escrivão
+12753;Serventuário - Escrivão
+12759;Serventuário - Escrivão
+12765;Magistrado
+12766;Magistrado
+12767;Magistrado
+12768;Magistrado
+12769;Magistrado
+12792;Magistrado
