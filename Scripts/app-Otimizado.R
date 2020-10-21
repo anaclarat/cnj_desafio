@@ -305,7 +305,7 @@ GerarLog0 <- function(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,fil
 # UI ##########################################################################
 ui <- fluidPage(
   
-  titlePanel('Mapeamento de Processos'),
+  titlePanel('DataJud Miner'),
   sidebarLayout(
     
     sidebarPanel(
@@ -337,7 +337,7 @@ ui <- fluidPage(
       ),
       
       actionButton(inputId = "Nova_Pesquisa",
-                   label = "Nova Pesquisa")
+                   label = "Limpar Campos")
       
     ),
     
@@ -347,9 +347,12 @@ ui <- fluidPage(
                   
                   tabPanel(title = "Instruções",
                            #br(), h1(textOutput("Instruções")),
-                           br(), h4('Para começar sua análise, selecione ao lado os filtros desejados e clique nos menus acima.'),
-                           br(),h4('Para recomeçar uma nova pesquisa, volte a esta página e clique no botão Nova Pesquisa.'),
-                           br(),h4('Certifique-se que todas as seleções encontram-se na opção Todos antes de selecionar novo Menu.')),
+                           br(),h4(strong('PRIMEIRA CONSULTA')),
+                           br(),h4('Selecione no menu lateral os filtros desejados e em seguida selecione o modelo que deseja visualizar no menu superior. Obs: nenhum filtro deve ser alterado durante visualização.'),
+                           br(),h4(strong('PRÓXIMA CONSULTA')),
+                           br(),h4('Clique em *Nova Pesquisa* para reiniciar as escolhas dos filtros no menu lateral e em seguida selecione o modelo que deseja visualizar no menu superior.'),
+                           br(),h4(strong('Obs:')),
+                           br(),h4('Certifique-se que todas as seleções do menu lateral encontram-se na opção *Todos* antes de reiniciar a seleção dos filtros.')),
                   
                   tabPanel(title = "Sumário",
                            br(), 
@@ -383,7 +386,7 @@ ui <- fluidPage(
                              ))
                   ),
                   
-                  tabPanel(title = "Process map",
+                  tabPanel(title = "Mapas de Processo por movimento",
                            br(), uiOutput("process_map")),
                   
                   tabPanel(title = "Mapa com animação",
@@ -392,10 +395,10 @@ ui <- fluidPage(
                   tabPanel(title = "Fluxos frequentes",
                            br(), uiOutput("Fluxos_frequentes")),
                   
-                  tabPanel(title = "Mapa de transferência de trabalho",
+                  tabPanel(title = "Mapas de Processo por recurso",
                            br(),uiOutput("Mapa_trabalho")),
                   
-                  tabPanel(title = "Dependency Matrix",
+                  tabPanel(title = "Matriz de Dependências",
                            br(), grVizOutput("Dependency_Tot"))
                   
                   
@@ -409,7 +412,6 @@ server <- function(input, output, session) {
   
   #Botões laterais
   ########################  
-  
   
   #Resetar dados e escolhas
   observeEvent(input$Nova_Pesquisa,{
@@ -444,8 +446,7 @@ server <- function(input, output, session) {
 
                         },
                       selected = 'Todos'))
-  
-  
+
   #Grau
   observeEvent(
     input$e2,
@@ -461,7 +462,6 @@ server <- function(input, output, session) {
                         },
                       selected = 'Todos'))
  
-  
   #Órgão Julgador
   observeEvent(
     input$e3,
@@ -476,7 +476,6 @@ server <- function(input, output, session) {
                                                                                              tribunal_int$cluster2==input$e0 ],'Todos')))
                         },
                       selected = 'Todos'))
-  
   
   formulaText0 <- reactive({
     paste(input$e0)
@@ -517,7 +516,6 @@ server <- function(input, output, session) {
   output$caption4 <- renderText({
     formulaText4()
   })
-  
   
   # Sumario---------------------------------------------------------------
   output$tot_processos <- renderText({
@@ -621,7 +619,6 @@ server <- function(input, output, session) {
     prev %>% plot()
   })
   
-  
   #process_map-------------------------------------------------------------
   output$process_map <- renderUI({
     
@@ -672,13 +669,12 @@ server <- function(input, output, session) {
         ##filtragem
         mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
         
-        ##Gera??o do Log  
+        ##Geração do Log  
         mc_log_resource %>%
           process_map(performance(median, "days"))
       })
     )
   })
-  
   
   # Animação de Processo-----------------------------------------------------
   output$process_animate <- renderUI({
@@ -735,13 +731,12 @@ server <- function(input, output, session) {
     )
   })
   
-  
   #Mapa_trabalho--------------------------------------------------------------
   output$Mapa_trabalho <- renderUI({
     
     tagList(
       
-      p("Mapa de transferência de trabalho"),
+      p("Mapa de frequência do processo (absoluta) por recurso"),
       renderGrViz({
         ##filtros
         filtroGrOrgaos <- as.character(formulaText0())
@@ -753,13 +748,46 @@ server <- function(input, output, session) {
         ##filtragem
         mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
         
-        ##Gera??o do Log  
+        ##Geração do Log  
         mc_log_resource %>%
-          resource_map() 
+          resource_map(type = frequency("absolute")) 
+      }),
+      
+      p("Mapa de frequência do processo (relativa) por recurso"),
+      renderGrViz({
+        ##filtros
+        filtroGrOrgaos <- as.character(formulaText0())
+        filtroAssuntos <- as.character(formulaText1())
+        filtroClasses <- as.character(formulaText2())
+        filtroGrau <- as.character(formulaText3())
+        filtroOrgao <- as.character(formulaText4())
+        
+        ##filtragem
+        mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
+        
+        ##Geração do Log  
+        mc_log_resource %>%
+          resource_map(type = frequency("relative_case")) 
+      }),
+      
+      p("Mapas de Processo por recurso(mediana em dias)"),
+      renderGrViz({
+        ##filtros
+        filtroGrOrgaos <- as.character(formulaText0())
+        filtroAssuntos <- as.character(formulaText1())
+        filtroClasses <- as.character(formulaText2())
+        filtroGrau <- as.character(formulaText3())
+        filtroOrgao <- as.character(formulaText4())
+        
+        ##filtragem
+        mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
+        
+        ##Geração do Log  
+        mc_log_resource %>%
+          resource_map(performance(median, "days")) 
       })
     )
   })
-  
   
   #Fluxos_frequentes------------------------------------------------------
   output$Dependency_Tot <- #renderUI({
@@ -784,10 +812,7 @@ server <- function(input, output, session) {
   # )
   #})
   
-  
-  
   # INDUCTIVE MINER-------------------------------------------------------
-  
 
   output$dep_matrix <- renderGrViz({
     ##filtros
