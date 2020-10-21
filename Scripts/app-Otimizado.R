@@ -1,3 +1,7 @@
+
+# Execu√ß√£o de packages utilizados no script. Se eles ainda n√£o est√£o instalados,
+# recomendamos executar o arquivo "install_packages.R" disponibilizado no GitHub
+# deste projeto.
 library(shiny)
 library(shinyEventLogger)
 
@@ -7,14 +11,12 @@ library(DiagrammeR)
 library(bupaR)
 library(processmapR)
 
-
 library(bupaR)
 library(daqapo)
 library(datetime)
 library(dplyr)
 library(edeaR)
 library(eventdataR)
-#library(flipTime)
 library(heuristicsmineR)
 library(jsonlite)
 library(lubridate)
@@ -33,7 +35,11 @@ library(ggplot2)
 
 library(DiagrammeR)
 
-#Diretorio onde est„o os arquivos-----------------------------------------------
+library(heuristicsmineR)
+#library(petrinetR)
+
+
+#Diretorio onde est√£o os arquivos-----------------------------------------------
 
 diretorio <- 'D:/Inova/Dados-CNJ_disponibilizados/base/'
 
@@ -43,33 +49,35 @@ diretorio <- 'D:/Inova/Dados-CNJ_disponibilizados/base/'
 setwd(diretorio)
 
 # 0.BASE DE DADOS
+
 tribunal_orig <- NA
 
 tribunal_orig <- read.csv2("./Arquivos/1/TRF2.csv", header=TRUE, sep=";")
 
+# tribunal_int √© uma vari√°vel intermedi√°ria dos dados do tribunal
 tribunal_int <- NA
 
 tribunal_int <- tribunal_orig %>%
-  mutate(dadosBasicos.assunto.codigoNacional2 = dadosBasicos.assunto.codigoNacional) %>%
+  # mutate(dadosBasicos.assunto.codigoNacional2 = dadosBasicos.assunto.codigoNacional) %>%
   mutate(dadosBasicos.assunto.descricao2 = dadosBasicos.assunto.descricao) %>%
-  mutate(dadosBasicos.assunto.principal2 = dadosBasicos.assunto.principal) %>%
-  mutate(dadosBasicos.classeProcessual2 = dadosBasicos.classeProcessual) %>%
-  mutate(dadosBasicos.codigoLocalidade2 = dadosBasicos.codigoLocalidade) %>%
-  mutate(dadosBasicos.competencia2 = dadosBasicos.competencia) %>%
+  # mutate(dadosBasicos.assunto.principal2 = dadosBasicos.assunto.principal) %>%
+  # mutate(dadosBasicos.classeProcessual2 = dadosBasicos.classeProcessual) %>%
+  # mutate(dadosBasicos.codigoLocalidade2 = dadosBasicos.codigoLocalidade) %>%
+  # mutate(dadosBasicos.competencia2 = dadosBasicos.competencia) %>%
   mutate(dadosBasicos.dataAjuizamento2 = dadosBasicos.dataAjuizamento) %>%
   mutate(dadosBasicos.descricaoclasseProcessual2 = dadosBasicos.descricaoclasseProcessual) %>%
-  mutate(dadosBasicos.nivelSigilo2 = dadosBasicos.nivelSigilo) %>%
+  # mutate(dadosBasicos.nivelSigilo2 = dadosBasicos.nivelSigilo) %>%
   mutate(dadosBasicos.numero2 = dadosBasicos.numero) %>%
-  mutate(dadosBasicos.orgaoJulgador.codigoMunicipioIBGE2 = dadosBasicos.orgaoJulgador.codigoMunicipioIBGE) %>%
-  mutate(dadosBasicos.orgaoJulgador.codigoOrgao2 = dadosBasicos.orgaoJulgador.codigoOrgao) %>%
+  # mutate(dadosBasicos.orgaoJulgador.codigoMunicipioIBGE2 = dadosBasicos.orgaoJulgador.codigoMunicipioIBGE) %>%
+  # mutate(dadosBasicos.orgaoJulgador.codigoOrgao2 = dadosBasicos.orgaoJulgador.codigoOrgao) %>%
   mutate(dadosBasicos.orgaoJulgador.instancia2 = dadosBasicos.orgaoJulgador.instancia) %>%
   mutate(dadosBasicos.orgaoJulgador.nomeOrgao2 = dadosBasicos.orgaoJulgador.nomeOrgao) %>%
-  mutate(dadosBasicos.siglaclasse2 = dadosBasicos.siglaclasse) %>%
-  mutate(dadosBasicos.valorCausa2 = dadosBasicos.valorCausa) %>%
+  # mutate(dadosBasicos.siglaclasse2 = dadosBasicos.siglaclasse) %>%
+  # mutate(dadosBasicos.valorCausa2 = dadosBasicos.valorCausa) %>%
   mutate(grau2 = grau) %>%
-  mutate(IBGE.Nome_Mesorregiao2 = IBGE.Nome_Mesorregiao) %>%
-  mutate(IBGE.Nome_Municipio2 = IBGE.Nome_Municipio) %>%
-  mutate(millisInsercao2 = millisInsercao) %>%
+  # mutate(IBGE.Nome_Mesorregiao2 = IBGE.Nome_Mesorregiao) %>%
+  # mutate(IBGE.Nome_Municipio2 = IBGE.Nome_Municipio) %>%
+  # mutate(millisInsercao2 = millisInsercao) %>%
   mutate(movimento.dataHora2 = movimento.dataHora) %>%
   mutate(movimento.movimentoNacional.codigoNacional2 = movimento.movimentoNacional.codigoNacional) %>%
   mutate(movimento.movimentoNacional.descricao2 = movimento.movimentoNacional.descricao) %>%
@@ -78,39 +86,85 @@ tribunal_int <- tribunal_orig %>%
 
 tribunal_int[1:ncol(tribunal_orig)] <- NULL
 
+trf2_final <- tribunal_int
+
+# O c√≥digo comentado abaixo √© destinado √† reuni√£o de dados de outros tribunais
+# Para a sua utiliza√ß√£o basta replicar o c√≥digo acima feito para o TRF2 para
+# cada novo dataframe. Ao final ser√£o todos reunidos na vari√°vel "pg" de processos
+# gerais.
+
+# trf11_final
+# trf12_final
+# trf13_final
+# trf14_final
+# trf15_final
+# trf2_final
+# trf31_final
+# trf32_final
+# trf33_final
+# trf51_final
+# trf52_final
+# trf53_final
+# trf54_final
+# 
+# pg <- NA
+# 
+# pg <- rbind(trf11_final,
+#             trf12_final,
+#             trf13_final,
+#             trf14_final,
+#             trf15_final,
+#             trf2_final,
+#             trf31_final,
+#             trf32_final,
+#             trf33_final,
+#             trf51_final,
+#             trf52_final,
+#             trf53_final,
+#             trf54_final)
+
+# A vari√°vel "pg" inclui todos os processos em an√°lise
 pg <- NA
+# Como estamos utilizando somente o TRF2 que s√≥ possui um arquivo, "pg" √© o mesmo
+# que o dataframe do TRF2
+pg <- trf2_final
 
-pg <- tribunal_int
-
+# A vari√°vel "case_id" √© necess√°ria para diferenciar processos com mesmo n√∫mero
+# mas que possuem classe processual diferente.
 case_id <- NA
-case_id <- paste(pg$'dadosBasicos.numero', "|", pg$'dadosBasicos.classeProcessual')
-pg$'case_id' <- c(case_id)
+case_id <- paste(pg$dadosBasicos.numero, "|", pg$dadosBasicos.classeProcessual)
+pg$case_id <- c(case_id)
+pg$dadosBasicos.numero <- NULL
 
-# Ajustar os formatos de data/hora
+# Ajustar os formatos de data/hora para viabilizar a gera√ß√£o da vari√°vel de
+# event log a ser utilizada nos algoritmos de process mining.
 x <- NA
-x <- c(pg$'movimento.dataHora')
+x <- c(pg$movimento.dataHora)
 movimento.dataHora2 <- NA
 movimento.dataHora2 <- ymd_hms(x)
-pg$'movimento.dataHora2' <- c(movimento.dataHora2)
+pg$movimento.dataHora2 <- c(movimento.dataHora2)
 x <- NA
-x <- c(pg$'dadosBasicos.dataAjuizamento2')
+x <- c(pg$dadosBasicos.dataAjuizamento2)
 dadosBasicos.dataAjuizamento2 <- NA
 dadosBasicos.dataAjuizamento2 <- ymd_hms(x)
-pg$'dadosBasicos.dataAjuizamento2' <- c(dadosBasicos.dataAjuizamento2)
+pg$dadosBasicos.dataAjuizamento2 <- c(dadosBasicos.dataAjuizamento2)
 
-# Inserir tipos de respons√°vel pelo movimento: magistrado ou servidor
+# Inserir tipos de respons√°vel pelo movimento: identifica√ß√£o de Magistrado ou 
+# do perfil de Serventu√°rio (Arquivista, Auxiliar da Justi√ßa, Contador, 
+# Distribuidor, Escriv√£o/Diretor de Secretaria/Secret√°rio Jur√≠dico e Oficial
+# de Justi√ßa).  Essa tabela foi elaborada a partir da tabela de movimentos do
+# CNJ no seu primeiro n√≠vel (Magistrado) e segundo n√≠vel (Serventu√°rio).
 tab_movimentos <- NA
-tab_movimentos <- read.csv2("./Arquivos/movimentos_tipo_responsavel.csv", header=TRUE, sep=";")
+tab_movimentos <- read.csv2("./Arquivos/0/movimentos_tipo_responsavel.csv", header=TRUE, sep=";")
 head(tab_movimentos)
 pg <- left_join(pg, tab_movimentos, #%>% select(codigo, tipo_responsavel_movimento),
                 by = c("movimento.movimentoNacional.codigoNacional2" = "codigo"))
 
-mc <- NA
-mc <- pg
-
-mc_log <- mc %>%
+# A vari√°vel "mc_log" inclui todos os event logs no formato a ser posteriormente
+# utilizado nos algoritmos de process mining.
+mc_log <- pg %>%
   # Considerando que todos os movimentos s√£o registros de atividades j√°
-  #   conclu√das, o c√≥digo abaixo adiciona o status "complete" para o atributo
+  #   conclu√≠das, o c√≥digo abaixo adiciona o status "complete" para o atributo
   #   lifecycle_id.
   mutate(status = "complete",
          activity_instance = 1:nrow(.)) %>%
@@ -123,41 +177,45 @@ mc_log <- mc %>%
     resource_id = "tipo_responsavel_movimento"
   )
 
+# XX Comentada
+# mc_resource <- mc_log
 
-
-mc_resource <- mc_log
-
-#CriaÁ„o dos choices com grupo total
+#Cria√ß√£o dos choices com grupo total
 trib_gr_orgaos <- tribunal_int
 tab_gr_orgaos <- unique(trib_gr_orgaos$cluster2)  %>% sort()
 tab_gr_orgaos <- c('Todos',tab_gr_orgaos)
 
-mc_log_resource <- mc_resource
+# XX Comentado porque n√£o parece influenciar
 
-#FunÁ„o filtro ###########################################
+#mc_log_resource <- mc_log
+
+#Fun√ß√£o filtro ###########################################
 
 filtroGrOrgaos <- 'Todos'
 
-GerarLog0 <- function(filtroGrOrgaos,filtroAssuntos,filtroGrau,filtroOrgao){
+
+
+GerarLog0 <- function(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao){
   
-  ##Grupo de ˆrg„os
+  ##Grupo de √≥rg√£os
   if (filtroGrOrgaos!= 'Todos'){
-    mc_log_resource  <- mc_resource %>% filter(cluster2 == as.character(filtroGrOrgaos))
+    mc_log_resource  <- mc_log %>% filter(cluster2 == as.character(filtroGrOrgaos))
   }else{
-    mc_log_resource <- mc_resource %>%
-      # Considerando que todos os movimentos s√£o registros de atividades j√°
-      #   conclu√das, o c√≥digo abaixo adiciona o status "complete" para o atributo
-      #   lifecycle_id.
-      mutate(status = "complete",
-             activity_instance = 1:nrow(.)) %>%
-      eventlog(
-        case_id = "case_id",
-        activity_id = "movimento.movimentoNacional.descricao2",
-        activity_instance_id = "activity_instance",
-        lifecycle_id = "status",
-        timestamp = "movimento.dataHora2",
-        resource_id = "tipo_responsavel_movimento"
-      )
+    mc_log_resource  <- mc_log 
+    # mc_log_resource <- mc_resource %>%
+    #   # Considerando que todos os movimentos s√£o registros de atividades j√°
+    #   #   conclu√≠das, o c√≥digo abaixo adiciona o status "complete" para o atributo
+    #   #   lifecycle_id.
+    #   mutate(status = "complete",
+    #          activity_instance = 1:nrow(.)) %>%
+    #   eventlog(
+    #     case_id = "case_id",
+    #     activity_id = "movimento.movimentoNacional.descricao2",
+    #     activity_instance_id = "activity_instance",
+    #     lifecycle_id = "status",
+    #     timestamp = "movimento.dataHora2",
+    #     resource_id = "tipo_responsavel_movimento"
+    # )
     
   }
   
@@ -166,19 +224,39 @@ GerarLog0 <- function(filtroGrOrgaos,filtroAssuntos,filtroGrau,filtroOrgao){
     mc_log_resource  <- mc_log_resource %>% filter(dadosBasicos.assunto.descricao2 == filtroAssuntos)
   }
   else{
-    mc_log_resource <- mc_resource %>%
-      # Considerando que todos os movimentos s√£o registros de atividades j√°
-      #   conclu√das, o c√≥digo abaixo adiciona o status "complete" para o atributo
-      #   lifecycle_id.
-      mutate(status = "complete",
-             activity_instance = 1:nrow(.)) %>%
-      eventlog(
-        case_id = "case_id",
-        activity_id = "movimento.movimentoNacional.descricao2",
-        activity_instance_id = "activity_instance",
-        lifecycle_id = "status",
-        timestamp = "movimento.dataHora2",
-        resource_id = "tipo_responsavel_movimento")
+    # mc_log_resource <- mc_resource %>%
+    #   # Considerando que todos os movimentos s√£o registros de atividades j√°
+    #   #   conclu√≠das, o c√≥digo abaixo adiciona o status "complete" para o atributo
+    #   #   lifecycle_id.
+    #   mutate(status = "complete",
+    #          activity_instance = 1:nrow(.)) %>%
+    #   eventlog(
+    #     case_id = "case_id",
+    #     activity_id = "movimento.movimentoNacional.descricao2",
+    #     activity_instance_id = "activity_instance",
+    #     lifecycle_id = "status",
+    #     timestamp = "movimento.dataHora2",
+    #     resource_id = "tipo_responsavel_movimento")
+  }
+  
+  ##Classe
+  if (filtroClasses!= 'Todos'){
+    mc_log_resource  <- mc_log_resource %>% filter(dadosBasicos.descricaoclasseProcessual2 == filtroClasses)
+  }
+  else{
+    # mc_log_resource <- mc_resource %>%
+    #   # Considerando que todos os movimentos s√£o registros de atividades j√°
+    #   #   conclu√≠das, o c√≥digo abaixo adiciona o status "complete" para o atributo
+    #   #   lifecycle_id.
+    #   mutate(status = "complete",
+    #          activity_instance = 1:nrow(.)) %>%
+    #   eventlog(
+    #     case_id = "case_id",
+    #     activity_id = "movimento.movimentoNacional.descricao2",
+    #     activity_instance_id = "activity_instance",
+    #     lifecycle_id = "status",
+    #     timestamp = "movimento.dataHora2",
+    #     resource_id = "tipo_responsavel_movimento")
   }
   
   ##Grau
@@ -186,39 +264,39 @@ GerarLog0 <- function(filtroGrOrgaos,filtroAssuntos,filtroGrau,filtroOrgao){
     mc_log_resource  <- mc_log_resource %>% filter(grau2 == filtroGrau )
   }
   else{
-    mc_log_resource <- mc_resource %>%
-      # Considerando que todos os movimentos s√£o registros de atividades j√°
-      #   conclu√das, o c√≥digo abaixo adiciona o status "complete" para o atributo
-      #   lifecycle_id.
-      mutate(status = "complete",
-             activity_instance = 1:nrow(.)) %>%
-      eventlog(
-        case_id = "case_id",
-        activity_id = "movimento.movimentoNacional.descricao2",
-        activity_instance_id = "activity_instance",
-        lifecycle_id = "status",
-        timestamp = "movimento.dataHora2",
-        resource_id = "tipo_responsavel_movimento")
+    # mc_log_resource <- mc_resource %>%
+    #   # Considerando que todos os movimentos s√£o registros de atividades j√°
+    #   #   conclu√≠das, o c√≥digo abaixo adiciona o status "complete" para o atributo
+    #   #   lifecycle_id.
+    #   mutate(status = "complete",
+    #          activity_instance = 1:nrow(.)) %>%
+    #   eventlog(
+    #     case_id = "case_id",
+    #     activity_id = "movimento.movimentoNacional.descricao2",
+    #     activity_instance_id = "activity_instance",
+    #     lifecycle_id = "status",
+    #     timestamp = "movimento.dataHora2",
+    #     resource_id = "tipo_responsavel_movimento")
   }
   
-  ##”rg„o judici·rio
+  ##√ìrg√£o julgador
   if (filtroOrgao != 'Todos'){
     mc_log_resource  <- mc_log_resource %>% filter(dadosBasicos.orgaoJulgador.nomeOrgao2 == filtroOrgao )
   }
   else{
-    mc_log_resource <- mc_resource %>%
-      # Considerando que todos os movimentos s√£o registros de atividades j√°
-      #   conclu√das, o c√≥digo abaixo adiciona o status "complete" para o atributo
-      #   lifecycle_id.
-      mutate(status = "complete",
-             activity_instance = 1:nrow(.)) %>%
-      eventlog(
-        case_id = "case_id",
-        activity_id = "movimento.movimentoNacional.descricao2",
-        activity_instance_id = "activity_instance",
-        lifecycle_id = "status",
-        timestamp = "movimento.dataHora2",
-        resource_id = "tipo_responsavel_movimento")
+    # mc_log_resource <- mc_resource %>%
+    #   # Considerando que todos os movimentos s√£o registros de atividades j√°
+    #   #   conclu√≠das, o c√≥digo abaixo adiciona o status "complete" para o atributo
+    #   #   lifecycle_id.
+    #   mutate(status = "complete",
+    #          activity_instance = 1:nrow(.)) %>%
+    #   eventlog(
+    #     case_id = "case_id",
+    #     activity_id = "movimento.movimentoNacional.descricao2",
+    #     activity_instance_id = "activity_instance",
+    #     lifecycle_id = "status",
+    #     timestamp = "movimento.dataHora2",
+    #     resource_id = "tipo_responsavel_movimento")
   }
   
   return(mc_log_resource)
@@ -231,13 +309,14 @@ ui <- fluidPage(
   sidebarLayout(
     
     sidebarPanel(
-      h3('⁄ltima seleÁ„o:'),
+      h3('√öltima sele√ß√£o:'),
       h4(textOutput("caption0"),
          textOutput("caption1"),
          textOutput("caption2"),
-         textOutput("caption3")),
+         textOutput("caption3"),
+         textOutput("caption4")),
       selectInput(
-        'e0', '0. Selecione o grupo de Ûrg„os julgadores', choices = tab_gr_orgaos, selected = 'Todos',
+        'e0', '0. Selecione o grupo de √≥rg√£os julgadores', choices = tab_gr_orgaos, selected = 'Todos',
         selectize = FALSE
       ),
       selectInput(
@@ -245,16 +324,20 @@ ui <- fluidPage(
         selectize = FALSE
       ),
       selectInput(
-        'e2', '2. Selecione o grau', choices = "",selected = "" ,
+        'e2', '2. Selecione a classe', choices = "",selected = "" ,
         selectize = FALSE
       ),
       selectInput(
-        'e3', '3. Selecione a unidade judici·ria', choices = "",selected = "" ,
+        'e3', '3. Selecione o grau', choices = "",selected = "" ,
+        selectize = FALSE
+      ),
+      selectInput(
+        'e4', '. Selecione o √≥rg√£o julgador', choices = "",selected = "" ,
         selectize = FALSE
       ),
       
-      actionButton(inputId = "reload_eventlog",
-                   label = "Reload eventlog")
+      actionButton(inputId = "Nova_Pesquisa",
+                   label = "Nova Pesquisa")
       
     ),
     
@@ -262,10 +345,13 @@ ui <- fluidPage(
       # titlePanel(textOutput("caption")),
       tabsetPanel(type = "pills",
                   
-                  tabPanel(title = "InstruÁıes",
-                           br(), textOutput("InstruÁıes")),
+                  tabPanel(title = "Instru√ß√µes",
+                           #br(), h1(textOutput("Instru√ß√µes")),
+                           br(), h4('Para come√ßar sua an√°lise, selecione ao lado os filtros desejados e clique nos menus acima.'),
+                           br(),h4('Para recome√ßar uma nova pesquisa, volte a esta p√°gina e clique no bot√£o Nova Pesquisa.'),
+                           br(),h4('Certifique-se que todas as sele√ß√µes encontram-se na op√ß√£o Todos antes de selecionar novo Menu.')),
                   
-                  tabPanel(title = "Sum·rio",
+                  tabPanel(title = "Sum√°rio",
                            br(), 
                            fixedRow(
                              column(width = 4,
@@ -283,7 +369,7 @@ ui <- fluidPage(
                            br(),
                            fixedRow(
                              column(width = 12,
-                                    h3("Perfis de respons·veis pelos movimentos"),
+                                    h3("Perfis de respons√°veis pelos movimentos"),
                                     tableOutput("perfis_mov"),
                              ),
                              column(width = 12,
@@ -292,7 +378,7 @@ ui <- fluidPage(
                              ),
                              br(),
                              column(width = 12,
-                                    h3("FrequÍncia de movimentos"),
+                                    h3("Frequ√™ncia de movimentos"),
                                     plotOutput("freq_mov")
                              ))
                   ),
@@ -300,30 +386,20 @@ ui <- fluidPage(
                   tabPanel(title = "Process map",
                            br(), uiOutput("process_map")),
                   
-                  tabPanel(title = "Mapa com animaÁ„o",
+                  tabPanel(title = "Mapa com anima√ß√£o",
                            br(), uiOutput("process_animate")),
                   
                   tabPanel(title = "Fluxos frequentes",
                            br(), uiOutput("Fluxos_frequentes")),
                   
-                  tabPanel(title = "Mapa de transferÍncia de trabalho",
+                  tabPanel(title = "Mapa de transfer√™ncia de trabalho",
                            br(),uiOutput("Mapa_trabalho")),
                   
                   tabPanel(title = "Dependency Matrix",
-                           br(), uiOutput("Dependency_Tot")),
+                           br(), grVizOutput("Dependency_Tot"))
                   
-                  tabPanel(title = "Sequence analysis",
-                           br(),uiOutput("sequence_analysis")),
                   
-                  tabPanel(title = "Resource analysis",
-                           uiOutput("resource_analysis")),
-                  
-                  tabPanel(title = "Top users' actions",
-                           uiOutput("top_users_actions"))
-                  
-      )#,
-      # h3(textOutput("caption"))
-      #,grVizOutput("process_map")
+      )
     )
   )
 ) # end of ui
@@ -331,32 +407,17 @@ ui <- fluidPage(
 # SERVER ######################################################################
 server <- function(input, output, session) {
   
-  #   #InteraÁ„o com usu·rio
-  #   #########################
-  #   N <- 10
-  #   
-  #   result_val <- reactiveVal()
-  #   observeEvent(input$run,{
-  #     result_val(NULL)
-  #     future({
-  #       print("Running...")
-  #       for(i in 1:N){
-  #         Sys.sleep(1)
-  #       }
-  #       quantile(rnorm(1000))
-  #     }) %...>% result_val()
-  #   })
-  #   output$result <- renderTable({
-  #     req(result_val())
-  #   })
-  # }
-  #   
-  
-  #Reset botıes
-  #############
-  
-  #Botıes laterais
+  #Bot√µes laterais
   ########################  
+  
+  
+  #Resetar dados e escolhas
+  observeEvent(input$Nova_Pesquisa,{
+    mc_log_resource <- mc_log
+    updateSelectInput(session, 'e0', '0. Selecione o grupo de √≥rg√£os julgadores', 
+                      choices = tab_gr_orgaos, selected = 'Todos'
+    )
+  })
   
   #Assunto
   observeEvent(
@@ -364,44 +425,55 @@ server <- function(input, output, session) {
     updateSelectInput(session, 'e1', '1. Selecione o assunto', 
                       choices = if (input$e0 == 'Todos'){
                         sort(unique(c(tribunal_int$dadosBasicos.assunto.descricao2,'Todos')))
+
                       }else{
                         sort(unique(c(tribunal_int$dadosBasicos.assunto.descricao2[tribunal_int$cluster2==input$e0],'Todos')))
-                        
                       },
                       selected = 'Todos'))
-  #Grau
+  
+  #Classe
   observeEvent(
     input$e1,
-    updateSelectInput(session, 'e2', '2. Selecione o grau',
-                      choices = 
-                        #   if (input$e0 == 'Todos'){
-                        #   sort(unique(c(tribunal_int$grau2,'Todos')))
-                        # }else 
+    updateSelectInput(session, 'e2', '2. Selecione a classe',
+                      choices =
                         if(input$e1 == 'Todos'){
-                          sort(unique(c(tribunal_int$grau2,'Todos')))
+                          sort(unique(c(tribunal_int$dadosBasicos.descricaoclasseProcessual2,'Todos')))
                         } else{
-                          sort(unique(c(tribunal_int$grau2[tribunal_int$dadosBasicos.assunto.descricao2==input$e1
-                                                           & tribunal_int$cluster2==input$e0],'Todos')))
-                          
+                          sort(unique(c(tribunal_int$dadosBasicos.descricaoclasseProcessual2[tribunal_int$dadosBasicos.assunto.descricao2==input$e1 &
+                                                                                               tribunal_int$cluster2==input$e0],'Todos')))
+
                         },
                       selected = 'Todos'))
   
-  #”rg„o Julgador
+  
+  #Grau
   observeEvent(
     input$e2,
-    updateSelectInput(session, 'e3', '3. Selecione a unidade judici·ria',
+    updateSelectInput(session, 'e3', '3. Selecione o grau',
                       choices = 
-                        #   if (input$e0 == 'Todos'){
-                        #   sort(unique(c(tribunal_int$grau2,'Todos')))
-                        # }else 
                         if(input$e2 == 'Todos'){
+                          sort(unique(c(tribunal_int$grau2,'Todos')))
+                        } else{
+                          sort(unique(c(tribunal_int$grau2[tribunal_int$dadosBasicos.descricaoclasseProcessual2==input$e2 &
+                                                             tribunal_int$dadosBasicos.assunto.descricao2==input$e1 & 
+                                                             tribunal_int$cluster2==input$e0],'Todos')))
+                          
+                        },
+                      selected = 'Todos'))
+ 
+  
+  #√ìrg√£o Julgador
+  observeEvent(
+    input$e3,
+    updateSelectInput(session, 'e4', '4. Selecione o √≥rg√£o julgador',
+                      choices = 
+                        if(input$e3 == 'Todos'){
                           sort(unique(c(tribunal_int$dadosBasicos.orgaoJulgador.nomeOrgao2,'Todos')))
                         } else{
-                          sort(unique(c(tribunal_int$dadosBasicos.orgaoJulgador.nomeOrgao2[
-                            tribunal_int$grau2==input$e2 &
-                              tribunal_int$dadosBasicos.assunto.descricao2==input$e1 & 
-                              tribunal_int$cluster2==input$e0 
-                          ],'Todos')))
+                          sort(unique(c(tribunal_int$dadosBasicos.orgaoJulgador.nomeOrgao2[tribunal_int$grau2==input$e3 &
+                                                                                             tribunal_int$dadosBasicos.descricaoclasseProcessual2==input$e2 &
+                                                                                             tribunal_int$dadosBasicos.assunto.descricao2==input$e1 &
+                                                                                             tribunal_int$cluster2==input$e0 ],'Todos')))
                         },
                       selected = 'Todos'))
   
@@ -438,17 +510,27 @@ server <- function(input, output, session) {
     formulaText3()
   })
   
+  formulaText4 <- reactive({
+    paste(input$e4)
+  })
+  
+  output$caption4 <- renderText({
+    formulaText4()
+  })
+  
   
   # Sumario---------------------------------------------------------------
   output$tot_processos <- renderText({
     ##filtros
     filtroGrOrgaos <- as.character(formulaText0())
     filtroAssuntos <- as.character(formulaText1())
-    filtroGrau <- as.character(formulaText2())
-    filtroOrgao <- as.character(formulaText3())
+    filtroClasses <- as.character(formulaText2())
+    filtroGrau <- as.character(formulaText3())
+    filtroOrgao <- as.character(formulaText4())
+    
     
     ##filtragem
-    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroGrau,filtroOrgao)
+    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
     
     formatC(mc_log_resource %>% n_cases, format="f", big.mark = ".", decimal.mark = ",", digits=0)
   })
@@ -457,11 +539,12 @@ server <- function(input, output, session) {
     ##filtros
     filtroGrOrgaos <- as.character(formulaText0())
     filtroAssuntos <- as.character(formulaText1())
-    filtroGrau <- as.character(formulaText2())
-    filtroOrgao <- as.character(formulaText3())
+    filtroClasses <- as.character(formulaText2())
+    filtroGrau <- as.character(formulaText3())
+    filtroOrgao <- as.character(formulaText4())
     
     ##filtragem
-    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroGrau,filtroOrgao)
+    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
     
     formatC(mc_log_resource %>% n_activity_instances, format="f", big.mark = ".", decimal.mark = ",", digits=0)
   })
@@ -470,11 +553,12 @@ server <- function(input, output, session) {
     ##filtros
     filtroGrOrgaos <- as.character(formulaText0())
     filtroAssuntos <- as.character(formulaText1())
-    filtroGrau <- as.character(formulaText2())
-    filtroOrgao <- as.character(formulaText3())
+    filtroClasses <- as.character(formulaText2())
+    filtroGrau <- as.character(formulaText3())
+    filtroOrgao <- as.character(formulaText4())
     
     ##filtragem
-    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroGrau,filtroOrgao)
+    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
     
     formatC(mc_log_resource %>% n_activities, format="f", big.mark = ".", decimal.mark = ",", digits=0)
   })
@@ -483,11 +567,12 @@ server <- function(input, output, session) {
     ##filtros
     filtroGrOrgaos <- as.character(formulaText0())
     filtroAssuntos <- as.character(formulaText1())
-    filtroGrau <- as.character(formulaText2())
-    filtroOrgao <- as.character(formulaText3())
+    filtroClasses <- as.character(formulaText2())
+    filtroGrau <- as.character(formulaText3())
+    filtroOrgao <- as.character(formulaText4())
     
     ##filtragem
-    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroGrau,filtroOrgao)
+    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
     
     formatC(mc_log_resource %>% n_traces, format="f", big.mark = ".", decimal.mark = ",", digits=0)
   })
@@ -496,11 +581,12 @@ server <- function(input, output, session) {
     ##filtros
     filtroGrOrgaos <- as.character(formulaText0())
     filtroAssuntos <- as.character(formulaText1())
-    filtroGrau <- as.character(formulaText2())
-    filtroOrgao <- as.character(formulaText3())
+    filtroClasses <- as.character(formulaText2())
+    filtroGrau <- as.character(formulaText3())
+    filtroOrgao <- as.character(formulaText4())
     
     ##filtragem
-    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroGrau,filtroOrgao)
+    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
     
     mc_log_resource %>% resource_frequency("resource")
   })
@@ -509,11 +595,12 @@ server <- function(input, output, session) {
     ##filtros
     filtroGrOrgaos <- as.character(formulaText0())
     filtroAssuntos <- as.character(formulaText1())
-    filtroGrau <- as.character(formulaText2())
-    filtroOrgao <- as.character(formulaText3())
+    filtroClasses <- as.character(formulaText2())
+    filtroGrau <- as.character(formulaText3())
+    filtroOrgao <- as.character(formulaText4())
     
     ##filtragem
-    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroGrau,filtroOrgao)
+    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
     
     prev <- mc_log_resource %>% throughput_time("log")
     prev %>% plot()
@@ -523,11 +610,12 @@ server <- function(input, output, session) {
     ##filtros
     filtroGrOrgaos <- as.character(formulaText0())
     filtroAssuntos <- as.character(formulaText1())
-    filtroGrau <- as.character(formulaText2())
-    filtroOrgao <- as.character(formulaText3())
+    filtroClasses <- as.character(formulaText2())
+    filtroGrau <- as.character(formulaText3())
+    filtroOrgao <- as.character(formulaText4())
     
     ##filtragem
-    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroGrau,filtroOrgao)
+    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
     
     prev <- mc_log_resource %>% activity_frequency("activity")
     prev %>% plot()
@@ -538,50 +626,53 @@ server <- function(input, output, session) {
   output$process_map <- renderUI({
     
     tagList(
-      p("Mapa de frequÍncia do processo (absoluta)"),
+      p("Mapa de frequ√™ncia do processo (absoluta)"),
       renderGrViz({
         ##filtros
         filtroGrOrgaos <- as.character(formulaText0())
         filtroAssuntos <- as.character(formulaText1())
-        filtroGrau <- as.character(formulaText2())
-        filtroOrgao <- as.character(formulaText3())
+        filtroClasses <- as.character(formulaText2())
+        filtroGrau <- as.character(formulaText3())
+        filtroOrgao <- as.character(formulaText4())
         
         ##filtragem
-        mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroGrau,filtroOrgao)
+        mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
         
-        ##GeraÁ„o do Log  
+        ##Gera??o do Log  
         mc_log_resource %>%
           process_map(type = frequency("absolute"))
       }),
       
-      p("Mapa de frequÍncia do processo (relativa)"),
+      p("Mapa de frequ√™ncia do processo (relativa)"),
       renderGrViz({
         ##filtros
         filtroGrOrgaos <- as.character(formulaText0())
         filtroAssuntos <- as.character(formulaText1())
-        filtroGrau <- as.character(formulaText2())
-        filtroOrgao <- as.character(formulaText3())
+        filtroClasses <- as.character(formulaText2())
+        filtroGrau <- as.character(formulaText3())
+        filtroOrgao <- as.character(formulaText4())
         
         ##filtragem
-        mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroGrau,filtroOrgao)
+        mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
         
-        ##GeraÁ„o do Log  
+        ##Gera??o do Log  
         mc_log_resource %>%
           process_map(type = frequency("relative_case"))
       }),
       
-      p("Mapa de frequÍncia do processo (mediana em dias)"),
+      p("Mapa de frequ√™ncia do processo (mediana em dias)"),
       renderGrViz({
         ##filtros
         filtroGrOrgaos <- as.character(formulaText0())
         filtroAssuntos <- as.character(formulaText1())
-        filtroGrau <- as.character(formulaText2())
-        filtroOrgao <- as.character(formulaText3())
+        filtroClasses <- as.character(formulaText2())
+        filtroGrau <- as.character(formulaText3())
+        filtroOrgao <- as.character(formulaText4())
         
         ##filtragem
-        mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroGrau,filtroOrgao)
+        mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
         
-        ##GeraÁ„o do Log  
+        ##Gera??o do Log  
         mc_log_resource %>%
           process_map(performance(median, "days"))
       })
@@ -589,26 +680,25 @@ server <- function(input, output, session) {
   })
   
   
-  # AnimaÁ„o de Processo-----------------------------------------------------
+  # Anima√ß√£o de Processo-----------------------------------------------------
   output$process_animate <- renderUI({
     
     tagList(
       
-      p("Mapa com animaÁ„o"),
-      p(paste(as.character(formulaText0()),' ',as.character(formulaText1()),' ', 
-              as.character(formulaText2()),' ',as.character(formulaText3()))),
+      p("Mapa com anima√ß√£o"),
       
       renderProcessanimater({
         ##filtros
         filtroGrOrgaos <- as.character(formulaText0())
         filtroAssuntos <- as.character(formulaText1())
-        filtroGrau <- as.character(formulaText2())
-        filtroOrgao <- as.character(formulaText3())
+        filtroClasses <- as.character(formulaText2())
+        filtroGrau <- as.character(formulaText3())
+        filtroOrgao <- as.character(formulaText4())
         
         ##filtragem
-        mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroGrau,filtroOrgao)
+        mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
         
-        ##GeraÁ„o do Log  
+        ##Gera??o do Log  
         animate_process(mc_log_resource, 
                         mode = "relative", 
                         duration = 300,
@@ -625,18 +715,19 @@ server <- function(input, output, session) {
     
     tagList(
       
-      p("Mapa de frequÍncia do processo (mediana em dias)"),
+      p("Mapa de frequ√™ncia do processo (mediana em dias)"),
       renderPlot({
         ##filtros
         filtroGrOrgaos <- as.character(formulaText0())
         filtroAssuntos <- as.character(formulaText1())
-        filtroGrau <- as.character(formulaText2())
-        filtroOrgao <- as.character(formulaText3())
+        filtroClasses <- as.character(formulaText2())
+        filtroGrau <- as.character(formulaText3())
+        filtroOrgao <- as.character(formulaText4())
         
         ##filtragem
-        mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroGrau,filtroOrgao)
+        mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
         
-        ##GeraÁ„o do Log  
+        ##Gera??o do Log  
         mc_log_resource %>% 
           trace_explorer(coverage = 0.4) %>%
           plot()
@@ -644,24 +735,25 @@ server <- function(input, output, session) {
     )
   })
   
-  ########################N„o renderiza!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  
   #Mapa_trabalho--------------------------------------------------------------
   output$Mapa_trabalho <- renderUI({
     
     tagList(
       
-      p("Mapa de transferÍncia de trabalho"),
+      p("Mapa de transfer√™ncia de trabalho"),
       renderGrViz({
         ##filtros
         filtroGrOrgaos <- as.character(formulaText0())
         filtroAssuntos <- as.character(formulaText1())
-        filtroGrau <- as.character(formulaText2())
-        filtroOrgao <- as.character(formulaText3())
+        filtroClasses <- as.character(formulaText2())
+        filtroGrau <- as.character(formulaText3())
+        filtroOrgao <- as.character(formulaText4())
         
         ##filtragem
-        mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroGrau,filtroOrgao)
+        mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
         
-        ##GeraÁ„o do Log  
+        ##Gera??o do Log  
         mc_log_resource %>%
           resource_map() 
       })
@@ -670,43 +762,43 @@ server <- function(input, output, session) {
   
   
   #Fluxos_frequentes------------------------------------------------------
-  output$Dependency_Tot <- renderUI({
+  output$Dependency_Tot <- #renderUI({
     
-    tagList(
+    #tagList(
+    
+    # p("Dependency Matrix s/Threshold"),
+    renderGrViz({
+      ##filtros
+      filtroGrOrgaos <- as.character(formulaText0())
+      filtroAssuntos <- as.character(formulaText1())
+      filtroClasses <- as.character(formulaText2())
+      filtroGrau <- as.character(formulaText3())
+      filtroOrgao <- as.character(formulaText4())
       
-      p("Dependency Matrix s/Threshold"),
-      renderGrViz({
-        ##filtros
-        filtroGrOrgaos <- as.character(formulaText0())
-        filtroAssuntos <- as.character(formulaText1())
-        filtroGrau <- as.character(formulaText2())
-        filtroOrgao <- as.character(formulaText3())
-        
-        ##filtragem
-        mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroGrau,filtroOrgao)
-        
-        ##GeraÁ„o do Log  
-        mc_log_resource %>% dependency_matrix() %>% render_dependency_matrix() 
-      })
-    )
-  })
+      ##filtragem
+      mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
+      
+      ##Gera√ß√£o do Log  
+      mc_log_resource %>% dependency_matrix() %>% render_dependency_matrix() 
+    })
+  # )
+  #})
   
   
   
   # INDUCTIVE MINER-------------------------------------------------------
   
-  library(heuristicsmineR)
-  library(petrinetR)
-  
+
   output$dep_matrix <- renderGrViz({
     ##filtros
     filtroGrOrgaos <- as.character(formulaText0())
     filtroAssuntos <- as.character(formulaText1())
-    filtroGrau <- as.character(formulaText2())
-    filtroOrgao <- as.character(formulaText3())
+    filtroClasses <- as.character(formulaText2())
+    filtroGrau <- as.character(formulaText3())
+    filtroOrgao <- as.character(formulaText4())
     
     ##filtragem
-    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroGrau,filtroOrgao)
+    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
     
     dependency_matrix(mc_log_resource) %>% render_dependency_matrix()
   })
@@ -715,44 +807,47 @@ server <- function(input, output, session) {
     ##filtros
     filtroGrOrgaos <- as.character(formulaText0())
     filtroAssuntos <- as.character(formulaText1())
-    filtroGrau <- as.character(formulaText2())
-    filtroOrgao <- as.character(formulaText3())
+    filtroClasses <- as.character(formulaText2())
+    filtroGrau <- as.character(formulaText3())
+    filtroOrgao <- as.character(formulaText4())
     
     ##filtragem
-    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroGrau,filtroOrgao)
+    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
     
     causal_net(mc_log_resource) %>% render_causal_net()
   })
   
-  output$dep_matrix_filter <- renderGrViz({
+  output$dep_matrix_filter1 <- renderGrViz({
     ##filtros
     filtroGrOrgaos <- as.character(formulaText0())
     filtroAssuntos <- as.character(formulaText1())
-    filtroGrau <- as.character(formulaText2())
-    filtroOrgao <- as.character(formulaText3())
+    filtroClasses <- as.character(formulaText2())
+    filtroGrau <- as.character(formulaText3())
+    filtroOrgao <- as.character(formulaText4())
     
     ##filtragem
-    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroGrau,filtroOrgao)
+    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
     
     dependency_matrix(mc_log_resource, threshold = .7) %>% render_dependency_matrix()
   })
   
-  # VerificaÁ„oo de conformidade
+  # Verifica√ß√£o de conformidade
   
   output$check_rules1 <- renderTable({
     ##filtros
     filtroGrOrgaos <- as.character(formulaText0())
     filtroAssuntos <- as.character(formulaText1())
-    filtroGrau <- as.character(formulaText2())
-    filtroOrgao <- as.character(formulaText3())
+    filtroClasses <- as.character(formulaText2())
+    filtroGrau <- as.character(formulaText3())
+    filtroOrgao <- as.character(formulaText4())
     
     ##filtragem
-    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroGrau,filtroOrgao)
+    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
     
     mc_log_resource %>%
-      check_rule(starts("DistribuiÁ„o"), label = "DistribuiÁ„o") %>%
+      check_rule(starts("Distribui√ß√£o"), label = "Distribui√ß√£o") %>%
       check_rule(ends("Baixa Definitiva"), label = "Baixa_definitiva") %>%
-      group_by(DistribuiÁ„o, Baixa_definitiva) %>%
+      group_by(Distribui??o, Baixa_definitiva) %>%
       n_cases()
   })
   
@@ -760,369 +855,19 @@ server <- function(input, output, session) {
     ##filtros
     filtroGrOrgaos <- as.character(formulaText0())
     filtroAssuntos <- as.character(formulaText1())
-    filtroGrau <- as.character(formulaText2())
-    filtroOrgao <- as.character(formulaText3())
+    filtroClasses <- as.character(formulaText2())
+    filtroGrau <- as.character(formulaText3())
+    filtroOrgao <- as.character(formulaText4())
     
     ##filtragem
-    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroGrau,filtroOrgao)
+    mc_log_resource <- GerarLog0(filtroGrOrgaos,filtroAssuntos,filtroClasses,filtroGrau,filtroOrgao)
     
     mc_log_resource %>%
-      check_rule(contains_exactly("DistribuiÁ„oo", n = 1), label = "DistribuiÁ„o") %>%
+      check_rule(contains_exactly("Distribui√ß√£o", n = 1), label = "Distribui√ß√£o") %>%
       check_rule(contains_exactly("Baixa Definitiva", n = 1), label = "Baixa_definitiva") %>%
-      group_by(DistribuiÁ„o, Baixa_definitiva) %>%
+      group_by(Distribui??o, Baixa_definitiva) %>%
       n_cases()
   })  
-  
-  
-  
-  
-  
-  # eventlog_unfiltered ------------------------------------------------------
-  eventlog_unfiltered <- reactive({
-    
-    input$reload_eventlog
-    
-    if (file.exists(".db_url")) {
-      
-      message("Loading data from mongoDB...")
-      data <- read_eventlog(db = readLines(".db_url")[1],
-                            verbose  = FALSE)
-      
-    } else {
-      
-      message("Loading data from a filelog...")
-      data <- read_eventlog(
-        verbose = FALSE,
-        file = system.file("shiny", "demoapp/events.log",
-                           package = "shinyEventLogger")
-      )
-      
-    }
-    
-  })
-  
-  # eventlog -----------------------------------------------------------------
-  eventlog <- reactive({
-    
-    req(input$build_version)
-    
-    eventlog_unfiltered() %>%
-      filter(between(build,
-                     input$build_version[1],
-                     input$build_version[2]))
-    
-  })
-  
-  # eventlog_summary ---------------------------------------------------------
-  output$eventlog_summary <- renderUI({
-    
-    eventlog <- eventlog_unfiltered()
-    min_build <- min(eventlog$build, na.rm = TRUE)
-    max_build <- max(eventlog$build, na.rm = TRUE)
-    
-    tagList(
-      
-      p("There are ", strong(n_cases(eventlog)), " cases, ",
-        strong(n_activities(eventlog)), " activities,", br(),
-        " and ", strong(n_events(eventlog)), "events in the event log."),
-      
-      sliderInput(inputId = "build_version",
-                  label = "Events from DemoApp build version",
-                  min = min_build,
-                  max = max_build,
-                  value = c(max_build, max_build),
-                  step = 1, ticks = FALSE))
-    
-  })
-  
-  # eventlog_summary_filtered ------------------------------------------------
-  output$eventlog_summary_filtered <- renderUI({
-    
-    eventlog <- eventlog()
-    
-    p("Currently, we are using data from ",
-      strong(n_cases(eventlog)), " cases, ", br(),
-      strong(n_activities(eventlog)), " activities,",
-      " and ", strong(n_events(eventlog)), "events.")
-    
-  })
-  
-  # top_users_actions ---------------------------------------------------------
-  output$top_users_actions <- renderUI({
-    
-    plot_height <- 250
-    
-    tagList(
-      
-      renderPlot(height = plot_height, {
-        
-        data <-
-          eventlog() %>%
-          filter(event_name == "Dataset was selected" & !is.na(dataset)) %>%
-          count(dataset) %>%
-          arrange(desc(n)) %>%
-          mutate(n = if_else(dataset == "iris", n - n_cases(eventlog()), n))
-        
-        barplot(data$n,
-                names.arg = data$dataset,
-                col = 'darkgray',
-                border = 'white',
-                main = "Dataset most often selected*",
-                sub = "(*) without iris dataset selected by default")
-        
-      }), hr(),
-      
-      renderPlot(height = plot_height, {
-        
-        data <-
-          eventlog() %>%
-          filter(event_name == "input$variable" & output != "") %>%
-          filter(!is.na(dataset)) %>%
-          count(event_body, dataset) %>%
-          arrange(desc(n)) %>%
-          mutate(
-            n = if_else(
-              event_body == "Sepal.Length", n - n_cases(eventlog()), n)
-          )
-        
-        barplot(data$n,
-                names.arg = paste0(data$event_body, " (", data$dataset, ")"),
-                col = 'darkgray',
-                border = 'white',
-                main = "Variables most often selected*",
-                sub = "(*) without Sepal.Length selected by default")
-        
-      }), hr(),
-      
-      renderPlot(height = plot_height, {
-        
-        data <-
-          eventlog() %>%
-          filter(event_name == "input$bins") %>%
-          count(event_body) %>%
-          mutate(event_body = as.integer(event_body)) %>%
-          arrange(event_body) %>%
-          mutate(n = if_else(event_body == 10, n - n_cases(eventlog()), n))
-        
-        barplot(data$n,
-                names.arg = data$event_body,
-                col = 'darkgray',
-                border = 'white',
-                main = "Number of bins most often selected*",
-                sub = "(*) without 10 bins selected by default")
-        
-      }), hr(), br()
-      
-    )
-    
-  })
-  
-  
-  # unit_tests ---------------------------------------------------------------
-  output$unit_tests <- renderTable({
-    
-    eventlog() %>%
-      filter(event_type == "TEST") %>%
-      count(event_type, event_name, event_status,
-            variable, bins, fun, resource) %>%
-      arrange(event_status, event_name, variable, bins)
-    
-  })
-  
-  # top_traces ---------------------------------------------------------------
-  output$top_traces <- renderPlot(height = 400, {
-    
-    eventlog() %>%
-      # group_activites(act = "collapse") %>%
-      group_activites(act = "unite") %>%
-      # trace_explorer(coverage = 0.5)
-      trace_explorer(coverage = 1)
-    
-  })
-  
-  # time_analysis -------------------------------------------------------------
-  output$time_analysis <- renderUI({
-    
-    plot_height <- 350
-    
-    fluidPage(
-      
-      fluidRow(
-        column(width = 6,
-               
-               br(), p("Throughput time per dataset"),
-               renderPlot(height = plot_height, {
-                 
-                 eventlog() %>%
-                   filter(!is.na(dataset)) %>%
-                   group_by(dataset) %>%
-                   throughput_time(level = "log", units = "mins") %>%
-                   plot()
-                 
-               })
-               
-        ),
-        column(width = 6,
-               
-               br(), p("Idle time per dataset"),
-               renderPlot(height = plot_height, {
-                 
-                 eventlog() %>%
-                   filter(!is.na(dataset)) %>%
-                   group_by(dataset) %>%
-                   idle_time(level = "log", units = "mins") %>%
-                   plot()
-                 
-               })
-        )
-      ),
-      
-      fluidRow(
-        column(width = 6, offset = 0,
-               
-               br(), p("Processing time per dataset"),
-               renderPlot(height = plot_height, {
-                 
-                 eventlog() %>%
-                   filter(!is.na(dataset)) %>%
-                   group_by(dataset) %>%
-                   processing_time(level = "log", units = "mins") %>%
-                   plot()
-                 
-               })
-               
-        ),
-        column(width = 6, offset = 0,
-               
-               br(), p("Dotted chart of cases"),
-               renderPlot(height = plot_height, {
-                 
-                 eventlog() %>%
-                   group_activites() %>%
-                   dotted_chart(units = "mins",
-                                x = "relative",
-                                sort = "duration")
-                 
-               })
-               
-        )
-      )
-    )
-  })
-  
-  # sequence_analysis --------------------------------------------------------
-  output$sequence_analysis <- renderUI({
-    
-    plot_height <- 350
-    
-    fluidPage(
-      fluidRow(
-        column(width = 8, offset = 2,
-               
-               br(), p("Precedence matrix"),
-               renderPlot(height = plot_height, {
-                 
-                 eventlog() %>%
-                   group_activites(act = "unite") %>%
-                   precedence_matrix(type = "relative") %>%
-                   plot()
-                 
-               })
-               
-        )
-      ),
-      
-      fluidRow(
-        column(width = 6,
-               
-               br(), p("Repetitions"),
-               renderPlot(height = plot_height * 0.6, {
-                 
-                 eventlog() %>%
-                   group_activites(act = "unite") %>%
-                   number_of_repetitions(level = "activity") %>%
-                   plot()
-                 
-               })
-        ),
-        column(width = 6,
-               
-               br(), p("Selfloops"),
-               renderPlot(height = plot_height * 0.6, {
-                 
-                 eventlog() %>%
-                   group_activites(act = "unite") %>%
-                   number_of_selfloops(level = "activity") %>%
-                   plot()
-                 
-               })
-        ),
-        column(width = 6,
-               
-               br(), p("End activities (grouped)"),
-               renderPlot(height = plot_height * 0.4, {
-                 
-                 eventlog() %>%
-                   group_activites(act = "unite") %>%
-                   end_activities(level = "activity") %>%
-                   plot()
-                 
-               })
-        ),
-        column(width = 6,
-               
-               br(), p("End activities (ungrouped)"),
-               renderPlot(height = plot_height * 0.4, {
-                 
-                 eventlog() %>%
-                   # group_activites(act = "unite") %>%
-                   end_activities(level = "activity") %>%
-                   plot()
-                 
-               })
-        )
-      )
-    )
-  })
-  
-  # resource_analysis --------------------------------------------------------
-  output$resource_analysis <- renderUI({
-    
-    plot_height <- 600
-    
-    fluidRow(
-      column(width = 6,
-             
-             br(),
-             renderPlot(height = plot_height, {
-               
-               eventlog() %>%
-                 filter(!is.na(fun), !is.na(resource)) %>%
-                 group_by(fun) %>%
-                 resource_frequency(level = "resource") %>%
-                 plot() + ggplot2::theme(
-                   legend.position = "bottom",
-                   axis.title = ggplot2::element_blank()
-                 )
-               
-             })
-      ),
-      column(width = 6,
-             
-             br(), renderPlot(height = plot_height, {
-               
-               eventlog() %>%
-                 filter(!is.na(fun), !is.na(resource)) %>%
-                 group_by(fun) %>%
-                 resource_involvement(level = "resource") %>%
-                 plot() + ggplot2::theme(
-                   legend.position = "bottom",
-                   axis.title = ggplot2::element_blank()
-                 )
-             })
-      )
-    )
-  })
   
 } # end of server
 
