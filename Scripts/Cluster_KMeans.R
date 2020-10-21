@@ -53,7 +53,7 @@ arquivo <- arquivo[,-26]
 proc_baixados <- arquivo %>% filter(movimento.movimentoNacional.codigoNacional == "22") 
 proc_baixados <- unique(proc_baixados$dadosBasicos.numero)
 
-####vetor l�gico indicando processos baixados
+####vetor l?gico indicando processos baixados
 trib1 <- arquivo$dadosBasicos.numero   %in% proc_baixados
 
 ####Registros com os processos baixados
@@ -61,7 +61,23 @@ arquivo <- arquivo[trib1,]
 
 rm(trib1,proc_baixados)
 
-#Gera��o dos arquivos
+###Renomeação de clusters de acordo com análise negocial
+clusters <- c(1:res$nbclust)
+clusters <- cbind2(clusters,c('1. Varas Federais Comuns com JEF sem especialização','2. Varas Federais Comuns sem especialização',
+                   '3. Varas Federais Criminais','4. Varas Federais Previdenciárias',
+                   '5. Varas Federais Comuns Diferenciadas','6. Varas Federais de Execução Fiscal',
+                   '7. Vara Federal Comum tipo A','8. Vara Federal Comum tipo B',
+                   '9. Vara Federal Comum tipo C')) %>% as.data.frame()
+
+names(clusters) <- c('codigo','cluster')
+
+arquivo <- merge(arquivo,clusters,by.x = 'cluster' ,by.y = 'codigo',all.x = TRUE)
+
+arquivo <- arquivo[,-1]
+
+names(arquivo)[25] <- 'cluster'
+
+#Geração dos arquivos
 png(filename = 'cluster.png', width=800, height=800)
 plot(res$clust_plot)
 
